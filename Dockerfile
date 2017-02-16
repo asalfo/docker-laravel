@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       vim \
       git \
       openssl \
+      php5-gd \
       && apt-get clean \
       && rm -rf /var/lib/apt/lists/* \
       && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
@@ -17,7 +18,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       && ./configure --prefix=/usr/local \
       && make && make install \
       && docker-php-ext-configure intl --with-icu-dir=/usr/local \
-      && docker-php-ext-install pdo pdo_mysql opcache intl sockets mbstring bcmath tokenizer \
+      && docker-php-ext-install pdo pdo_mysql opcache intl sockets mbstring bcmath tokenizer gd mysqli \
       && a2enmod rewrite \
       && pecl install xdebug \
       && pecl clear-cache \
